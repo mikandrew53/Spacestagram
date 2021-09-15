@@ -11,7 +11,8 @@ import {FormGroup, FormControl} from '@angular/forms';
 
 export class AppComponent {
   items = [
-    1, 1, 1, 1, 1, 1,
+    1, 1, 1
+    // 1, 1, 1, 1, 1, 1,
     // 1, 1, 1, 1, 1, 1,
     // 1, 1, 1, 1, 1, 1,
   ]
