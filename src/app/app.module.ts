@@ -16,13 +16,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { NavagationComponent } from './navagation/navagation.component';
 
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavagationComponent
   ],
   imports: [
     BrowserModule,
