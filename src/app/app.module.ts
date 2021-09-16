@@ -16,15 +16,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { NavagationComponent } from './navagation/navagation.component';
-
+import {MatRippleModule} from '@angular/material/core';
+import { NavigationComponent } from './navigation/navigation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CardsComponent } from './cards/cards.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavagationComponent
+    NavigationComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,9 @@ import { NavagationComponent } from './navagation/navagation.component';
     MatIconModule,
     MatBadgeModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRippleModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

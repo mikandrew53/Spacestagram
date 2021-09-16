@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 $grey: #303030;
-$dark-grey: lighten($color: $grey, $amount: 2);
+$very-dark-grey: darken($color: $grey, $amount: 4);
 $dark-grey: darken($color: $grey, $amount: 2);
 $primary: #e91e63;
 $accent: #607d8b;
+$warn: #f44336;
+
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 $logo-font: 'Marck Script', cursive;
 
@@ -82,9 +84,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .main{
     margin-top: 90px;
     padding: 50px;
-    p {
-        color: white;
-    }
+    padding-bottom: 200px;
 }
 
 .cards{
@@ -95,25 +95,53 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     row-gap: 20px;
 }
 
+
 .card {
+    padding: 15px 0 !important;
     position: relative;
     // max-width: 400px;
+    height: 600px;
+    // overflow-y: auto;
     .mat-card-header-text{
+        padding: 0 10px;
         margin-left: 0;
+        margin-bottom: 20px;
     }
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-    transition: transform ease-in-out 200ms;
+    // transition: transform ease-in-out 200ms;
     
     &:hover {
-        cursor: pointer;
-        transform: scale(1.01);
+        // cursor: pointer;
+        // transform: scale(1.01);
     }
-    .img {
-        // background-size: cover;
-        // width: 100%;
-        // height: 300px;
+    .img-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 300px;
+        .img {
+            width: 100%;
+            height: 100%;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+        .img-overlay{
+            position: absolute;
+            pointer-events: none;
+        }
+        .heart-in-img{
+            transform: scale(0);
+            opacity: 0;
+            // color: $warn;
+        }
+        .show-heart-in-img {
+            animation: liked 1000ms ease-in-out;
+        }
     }
     .like-decoy{
         opacity: 0;
@@ -122,15 +150,67 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .like{
         position: absolute;
         bottom: 10px;
+        left: 10px;
+        .heart-outline{
+            font-size: 25px;
+            position: relative;
+            top: 0;
+            left: 0;
+            transition: font-size 200ms ease-in-out;
+            &:hover {
+                // transform: scale(1.2);
+                transform: scale(1.01);
+                // font-size: 27px;
+                cursor: pointer;
+            }
+        }
+        .fill-heart{
+            // font-size: 0;
+            // font-size: 29px;
+            position: relative;
+            top: 8px;
+            left: -33px;
+            // opacity: 0;
+            transform: scale(0);
+            pointer-events: none;
+            transition: all ease-in-out 100ms;
+            color: $warn;
+        }
+        .show {
+            // transform: scale(1);
+            // opacity: 1;
+            transform:scale(1.2);
+            // font-size: 29px;
+        }
+    }
+    .content {
+        padding: 0 10px;
+        max-height: 140px;
+        overflow-y: auto;
     }
 }
 
+.section-loading {
+    background-color: $grey;
+    background: linear-gradient(110deg, $very-dark-grey 8%, $dark-grey 18%, $very-dark-grey 33%);
+    animation: 2s shine linear infinite;
+
+}
 .card-loading {
+    padding: 15px 0 !important;
     .loading {
         height: 100%;
+        .like {
+            .heart-outline{
+                &:hover{
+                    cursor: default;
+                }
+            }
+        }
     }
     min-height: 500px;
     .header-loading{
+        padding: 0 10px;
         width: 100%;
         height: 10%;
         min-height: 40px;
@@ -142,73 +222,82 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             width: 50%;
             height: 50%;
             min-height: 20px;
-            background-color: $grey;
-            background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
+            // background-color: $grey;
+            // background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
             margin-bottom: 10px;
             background-size: 200% 100%;
-            animation: 2s shine linear infinite;
+            // animation: 2s shine linear infinite;
 
         }
         .date-loading{
             width: 20%;
             height: 50%;
             min-height: 20px;
-            background-color: $grey;
-            background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
+            // background-color: $grey;
+            // background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
             margin-bottom: 10px;
             background-size: 200% 100%;
-            animation: 2s shine linear infinite;
+            // animation: 2s shine linear infinite;
         }
         
     }
     .img-loading {
         width: 100%;
-        height: 200px;
-        background-color: $grey;
-        background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
+        min-height: 200px;
+        height: 50%;
+        // background-color: $grey;
+        // background: linear-gradient(110deg, $dark-grey 8%, $grey 18%, $dark-grey 33%);
         margin-bottom: 15%;
         margin-bottom: 20px;
         background-size: 200% 100%;
-        animation: 2s shine linear infinite;
+        // animation: 2s shine linear infinite;
     }
 
     .content-loading {
         height: 20%;
+        padding: 0 10px;
         .line-one{
             height: 20%;
             width: 90%;
             min-height: 20px;
-            background-color: $grey;
-            background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
+            // background-color: $grey;
+            // background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
             margin-bottom: 5%;
             margin-bottom: 10px;
             background-size: 200% 100%;
-            animation: 2s shine linear infinite;
+            // animation: 2s shine linear infinite;
         }
         .line-two{
             height: 20%;
             min-height: 20px;
             width: 80%;
-            background-color: $grey;
-            background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
+            // background-color: $grey;
+            // background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
             margin-bottom: 5%;
             margin-bottom: 10px;
             background-size: 200% 100%;
-            animation: 2s shine linear infinite;
+            // animation: 2s shine linear infinite;
         }
         .line-three{
             height: 20%;
             min-height: 20px;
             width: 30%;
-            background-color: $grey;
-            background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
+            // background-color: $grey;
+            // background: linear-gradient(110deg, $grey 8%, $dark-grey 18%, $grey 33%);
             margin-bottom: 5%;
             margin-bottom: 10px;
             background-size: 200% 100%;
-            animation: 2s shine linear infinite;
+            // animation: 2s shine linear infinite;
+        }
+        .like{
+
+            .heart-outline {
+                &:hover {
+                    cursor: default;
+                }
+            }
         }
     }
-
 }
 
 @keyframes shine{
@@ -218,24 +307,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 }
 
-
 @media(max-width: 1320px){
     .cards{
         grid-template-columns: 50% 50%;
     }
 }
+
 @media(max-width: 637px){
     .cards{
         grid-template-columns: 100%;
     }
 }
-// @media(max-width: 1100px){
-//     .cards{
-//         grid-template-columns: 400px 400px;
-//     }
-// }
-// @media(max-width: 900px){
-//     .cards{
-//         grid-template-columns: 350px 350px;
-//     }
-// }
+@keyframes liked {
+    25% {
+    opacity: .9;
+    transform: scale(3);
+}
+    75%{
+       opacity: .9;
+       transform: scale(3);
+
+   }
+   100%{
+    opacity: 0;
+    transform: scale(0);
+   } 
+}
