@@ -92,11 +92,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     justify-content: center;
     grid-template-columns: 400px 400px 400px;
     column-gap: 20px;
-    row-gap: 20px;
+    row-gap: 40px;
 }
 
 
 .card {
+    box-shadow: 5px 5px 5px rgba(0,0,0,.08) !important;
     padding: 15px 0 !important;
     position: relative;
     // max-width: 400px;

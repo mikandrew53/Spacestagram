@@ -16,7 +16,7 @@ export class GetCardsService {
   async getSixRandomPics(): Promise<any> {
     console.log('yo');
     
-    const nasaResponse = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${this.key}&count=${this.count}&thumbs=false`);
+    const nasaResponse = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${this.key}&count=${this.count}&thumbs=true`);
       if(nasaResponse.ok){
           const nasaResponseData = await nasaResponse.json();
           return nasaResponseData;

@@ -7,7 +7,7 @@
       <div class="date-input" style="justify-self: center;">
         <mat-form-field style="height: 10;" appearance=fill >
           <mat-label >Enter a date range</mat-label>
-          <mat-date-range-input [rangePicker]="picker">
+          <mat-date-range-input [min]="minDate" [max]="maxDate" [rangePicker]="picker">
             <input matStartDate placeholder="Start date">
             <input matEndDate placeholder="End date">
           </mat-date-range-input>
