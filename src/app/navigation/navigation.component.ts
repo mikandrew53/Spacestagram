@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../cards/CardModle';
 import { NavEventsService } from './nav-events.service';
-import { NavEvent } from './NavEvent';
+
 
 
 
@@ -23,6 +22,8 @@ export class NavigationComponent implements OnInit {
   }
 
   dateRangeChange(dateRangeStart: any, dateRangeEnd: any){
+    if (dateRangeStart === '' && dateRangeEnd === '')
+      return
     dateRangeStart = this.parseDate(dateRangeStart)
     if (dateRangeEnd !== '')
       dateRangeEnd = this.parseDate(dateRangeEnd)

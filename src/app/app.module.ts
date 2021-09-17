@@ -17,8 +17,9 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatRippleModule} from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { NavigationComponent } from './navigation/navigation.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardsComponent } from './cards/cards.component';
 
 
@@ -44,7 +45,7 @@ import { CardsComponent } from './cards/cards.component';
     MatCardModule,
     MatTooltipModule,
     MatRippleModule,
-    FontAwesomeModule
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

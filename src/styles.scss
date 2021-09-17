@@ -118,11 +118,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-    transition: all ease-in-out 200ms;
-    
+    // transition: all ease-in-out 200ms;
     &:hover {
         // cursor: pointer;
-        transform: scale(1.01);
+        // transform: scale(1.01);
     }
     .img-wrapper {
         position: relative;

@@ -1,11 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {FormGroup, FormControl} from '@angular/forms';
-import { HeartFillService } from '../heart-fill.service';
 import { Card } from './CardModle';
 import { GetCardsService } from './get-cards.service';
 import { NavEventsService } from '../navigation/nav-events.service';
 import { NavEvent } from '../navigation/NavEvent';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -22,8 +21,6 @@ export class CardsComponent implements OnInit {
         this.getCards();
       }
   } 
-  faHeart = faHeart;
-  faHeartFill: any;
   cards: Array<Card> = []
   index = 0;
   home: boolean = true;
@@ -32,25 +29,30 @@ export class CardsComponent implements OnInit {
     end: new FormControl()
   });
 
+  startDate: string = '';
+  endDate: string = '';
+
   constructor(
-    private heartFill: HeartFillService, 
     private getCardsService: GetCardsService,
-    private nav: NavEventsService
+    private nav: NavEventsService,
+    private _snackBar: MatSnackBar
     ) { }
     
     ngOnInit(): void {
-    this.faHeartFill = this.heartFill.getHeart();
     this.getCards();
     this.nav.signUpEmail
     .subscribe((event: NavEvent) => {
+      const datesAreDifferent: boolean = (this.startDate !== event.startDate || this.endDate !== event.endDate); 
+      this.startDate = event.startDate;
+      this.endDate = event.endDate;
       if (event.home && !this.home){
         this.home = true;
         this.resetCards();
         this.getCards();
-      }else if(event.startDate !== '' && event.endDate !== ''){
+      }else if((event.startDate !== '' && event.endDate !== '') && datesAreDifferent){
         this.home = false;
         this.getCardsUsingDateRange(event.startDate, event.endDate);
-      }else if (event.startDate !== ''){
+      }else if (event.startDate !== '' && datesAreDifferent){
         this.home = false;
         this.getCardsOnDate(event.startDate);
       }
@@ -64,7 +66,29 @@ export class CardsComponent implements OnInit {
       return parseInt(`${date[date.length-2]}${date[date.length-1]}`);
   }
 
+  geYearAndMonth(date: string){
+    const dayAndYear = [];
+    let dashes = 0
+    for (let char of date){
+      if (char === '-' && dashes === 1)
+        break;
+      if (char === '-')
+        dashes++;
+      dayAndYear.push(char);
+    }
+    return dayAndYear.join('');
+
+  }
+
   getCardsUsingDateRange(startDate: string, endDate: string){
+    if (this.geYearAndMonth(startDate) !== this.geYearAndMonth(endDate)){
+      this._snackBar.open('Date range must be in the same month and year!', 'Okay', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 5000
+      });
+      return;
+    }
     const numOfDays = this.getDay(endDate) - this.getDay(startDate) + 1;
     this.resetCards();
     this.creatCards(numOfDays);
