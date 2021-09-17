@@ -9,6 +9,7 @@ export interface Card {
     liked?: boolean
     animate: boolean
     loading: boolean
+    imgLoading: boolean
     imgSrc: any
     display: boolean
 }

@@ -5,14 +5,14 @@
       </div>
   
       <div class="date-input" style="justify-self: center;">
-        <mat-form-field style="height: 10;" appearance=fill >
-          <mat-label >Enter a date range</mat-label>
+        <mat-form-field style="height: 10;" appearance=fill>
+          <mat-label>Enter a date range</mat-label>
           <mat-date-range-input [min]="minDate" [max]="maxDate" [rangePicker]="picker">
-            <input matStartDate placeholder="Start date">
-            <input matEndDate placeholder="End date">
+            <input matStartDate placeholder="Start date" #dateRangeStart>
+            <input matEndDate placeholder="End date" #dateRangeEnd>
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-date-range-picker #picker (closed)="dateRangeChange(dateRangeStart.value, dateRangeEnd.value)"></mat-date-range-picker>
         </mat-form-field>
         
       </div>  

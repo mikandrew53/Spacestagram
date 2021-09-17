@@ -59,14 +59,15 @@ export class CardsComponent implements OnInit {
         animate: false,
         loading: true,
         imgSrc: '',
-        display: true
+        display: true,
+        imgLoading: true
       })
     }
 
     this.GetCards.getSixRandomPics().then(data => {
       console.log(data);
       data.forEach((card: Card) => {
-        console.log(card.url);
+        // console.log(card.url);
         this.cards[this.index].date = card.date;
         this.cards[this.index].explanation = card.explanation;
         this.cards[this.index].hdurl = card.hdurl;
@@ -102,6 +103,13 @@ export class CardsComponent implements OnInit {
       card.animate = true
       setTimeout(() => card.animate = false , 1000);
     }
+  }
+
+  onImgLoad(card: Card){
+    console.log('loaded');
+    
+    card.imgLoading = false;
+    
   }
 
 }
