@@ -1,63 +1,58 @@
 
 <div class="cards">
     <mat-card class="card card-loading" *ngFor="let card of cards">
-      <div class="loading" *ngIf="card.loading">
-        <div class="header-loading ">
-          <div class="title-loading section-loading"></div>
-          <div class="date-loading section-loading"></div>
-        </div>
-        <div class="img-loading section-loading"></div>
-  
-          <div class="content-loading">
-            <div class="line-one section-loading"></div>
-            <div class="line-two section-loading"></div>
-            <div class="line-three section-loading"></div>
-          </div>
-          <div class="like-decoy">
-            <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-              <mat-icon>favorite_border</mat-icon>
-            </button>
-          </div>
-        <div class="like">
-          <!-- <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(244, 67, 54,.5)'" mat-icon-button> -->
-            <mat-icon  class="heart-outline">favorite_border</mat-icon>
-          <!-- </button> -->
-        
-        </div>
-      </div>
+        <div class="loading" *ngIf="card.loading">
+            <div class="header-loading ">
+                <div class="title-loading section-loading"></div>
+                <div class="date-loading section-loading"></div>
+            </div>
+            <div class="img-loading section-loading"></div>
 
-      <div class="loaded" *ngIf="!card.loading">
-        <mat-card-header>
-            <mat-card-title>{{card.title}}</mat-card-title>
-            <mat-card-subtitle>{{card.date}}</mat-card-subtitle>
-          </mat-card-header>
-          
-          <div class="img-wrapper">
+                <div class="content-loading">
+                <div class="line-one section-loading"></div>
+                <div class="line-two section-loading"></div>
+                <div class="line-three section-loading"></div>
+                </div>
+                <div class="like-decoy">
+                <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                </div>
+            <div class="like">
+                <mat-icon  class="heart-outline">favorite_border</mat-icon>
+            </div>
+        </div>
+
+        <div class="loaded" *ngIf="!card.loading">
+            <mat-card-header>
+                <mat-card-title>{{card.title}}</mat-card-title>
+                <mat-card-subtitle>{{card.date}}</mat-card-subtitle>
+            </mat-card-header>
+            
+            <div class="img-wrapper">
                 <div *ngIf="card.imgLoading" class="img-loading section-loading"></div>
-              <img class='img' mat-card-image src="{{card.url}}" alt="Photo of {{card.title}}" (dblclick)="onImgdbclick(card)" (load)="onImgLoad(card)">
-              <div class="img-overlay">
-                  <mat-icon class="heart-in-img" [ngClass]="{'show-heart-in-img': card.animate}">favorite</mat-icon>
-              </div>
-          </div>
-          
-          <mat-card-content class="content">
-            <p>{{card.explanation}}</p>
-          </mat-card-content>
-          <div class="like-decoy">
-            <mat-icon>favorite_border</mat-icon>
-          </div>
-          <div class="like">
-            <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(244, 67, 54,.5)'" mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="onLikeClicked(card)">
+                <img class='img' mat-card-image src="{{card.url}}" alt="Photo of {{card.title}}" (dblclick)="onImgdbclick(card)" (load)="onImgLoad(card)">
+                <div class="img-overlay">
+                    <mat-icon class="heart-in-img" [ngClass]="{'show-heart-in-img': card.animate}">favorite</mat-icon>
+                </div>
+            </div>
+            
+            <mat-card-content class="content">
+                <p>{{card.explanation}}</p>
+            </mat-card-content>
+            <div class="like-decoy">
                 <mat-icon>favorite_border</mat-icon>
-              </button>
-            <mat-icon class="fill-heart" [ngClass]="{'show': card.liked}">favorite</mat-icon>
-          </div>
-
-      </div>
+            </div>
+            <div class="like">
+                <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(244, 67, 54,.5)'" mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="onLikeClicked(card)">
+                    <mat-icon>favorite_border</mat-icon>
+                    </button>
+                <mat-icon class="fill-heart" [ngClass]="{'show': card.liked}">favorite</mat-icon>
+            </div>
+        </div>
     </mat-card>
+</div>
 
-  </div>
-
-<div class="more-icon-wrapper">
+<div class="more-icon-wrapper" *ngIf="home">
     <mat-icon class="more-icon">arrow_forward_ios</mat-icon>
 </div>

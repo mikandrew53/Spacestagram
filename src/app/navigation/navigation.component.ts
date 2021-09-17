@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../cards/CardModle';
+import { NavEventsService } from './nav-events.service';
+import { NavEvent } from './NavEvent';
 
 
 
@@ -12,7 +14,7 @@ import { Card } from '../cards/CardModle';
 export class NavigationComponent implements OnInit {
   minDate: Date | undefined;
   maxDate: Date | undefined;
-  constructor() { }
+  constructor(private navEvents: NavEventsService) { }
 
   ngOnInit(): void {
     const date = new Date();
@@ -21,23 +23,37 @@ export class NavigationComponent implements OnInit {
   }
 
   dateRangeChange(dateRangeStart: any, dateRangeEnd: any){
-    if (dateRangeEnd === ''){
-      console.log('');
-    }
     dateRangeStart = this.parseDate(dateRangeStart)
-    dateRangeEnd = this.parseDate(dateRangeEnd)
+    if (dateRangeEnd !== '')
+      dateRangeEnd = this.parseDate(dateRangeEnd)
+    this.navEvents.emitNavEvent({home: false, startDate: dateRangeStart, endDate: dateRangeEnd}) 
   }
 
   parseDate(date: string){
     let string = []
-    for ( let char of date){
-        if (char == '/')
-          string.push('-')  
-        else
-          string.push(char)
+    for(let i = date.length -4; i< date.length; i++)
+      string.push(date[i]);
+    
+    string.push('-');
+    let dashes = 0
+    for (let char of date){
+
+      if (char === '/' && dashes === 1)
+        break
+      if (char === '/'){
+        dashes++
+        string.push('-')
+        continue;
+      }
+      string.push(char);
     }
     return string.join('');
+    
+    
+  }
 
+  onLogoClick(){
+    this.navEvents.emitNavEvent({home: true, startDate: '', endDate: ''})
   }
 
   

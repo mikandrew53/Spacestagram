@@ -63,10 +63,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         backdrop-filter: blur(5px);
       }
       backdrop-filter: blur(10px);
-    h1 {
+
+    .logo{
+        position: relative;
+        z-index: 100;
         margin: 0;
         font-family: $logo-font;
         font-size: 3rem;
+        color: #fff;
+        &:hover {
+            cursor: pointer;
+        }
     }
     padding: 0 10%;
 
@@ -111,11 +118,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-    // transition: transform ease-in-out 200ms;
+    transition: all ease-in-out 200ms;
     
     &:hover {
         // cursor: pointer;
-        // transform: scale(1.01);
+        transform: scale(1.01);
     }
     .img-wrapper {
         position: relative;

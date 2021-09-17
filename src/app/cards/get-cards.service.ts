@@ -19,19 +19,27 @@ export class GetCardsService {
       if(nasaResponse.ok){
           const nasaResponseData = await nasaResponse.json();
           return nasaResponseData;
-      }else{
-        // return this.getRandomPics();
-        throw `Error: ${nasaResponse.status} ${nasaResponse.statusText}`;
-      }
+      }else
+        throw Error(`Error: ${nasaResponse.status} ${nasaResponse.statusText}`);
   }
 
   async getPictureWithDateRange(startDate: string, endDate: string): Promise<any>{
     const nasaResponse = await fetch(`${this.base}&start_date=${startDate}&end_date=${endDate}`);
     if (nasaResponse.ok){
       const nasaResponseData = await nasaResponse.json();
-          return nasaResponseData;
-    }else{
-      return this.getPictureWithDateRange(startDate, endDate);
-    }
+      return nasaResponseData;
+    }else
+      throw Error(`Error: ${nasaResponse.status} ${nasaResponse.statusText}`);
+  }
+
+  async getPictureOnDate(date: string){
+    console.log(date);
+    
+    const nasaResponse = await fetch(`${this.base}&date=${date}`);
+    if (nasaResponse.ok){
+      const nasaResponseData = await nasaResponse.json();
+      return nasaResponseData;
+    }else
+      throw Error(`Error: ${nasaResponse.status} ${nasaResponse.statusText}`);
   }
 }
