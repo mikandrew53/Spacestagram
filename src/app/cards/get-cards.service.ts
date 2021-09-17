@@ -8,21 +8,20 @@ export class GetCardsService {
   date: string = ''
   startDate: string = ''
   endDate: string = ''
-  count: number = 6
   thumbs: boolean = false
   base: string = 'https://api.nasa.gov/planetary/apod?api_key=s5OVNiFS4HNaCaAzt1sOXhQjhcinvtuOGiWkZ9pD'
   constructor() { }
 
-  async getSixRandomPics(): Promise<any> {
-    console.log('yo');
+  async getRandomPics(count:number = 6): Promise<any> {
+    console.log();
     
-    const nasaResponse = await fetch(`${this.base}&count=${this.count}&thumbs=true`);
+    const nasaResponse = await fetch(`${this.base}&count=${count}&thumbs=true`);
       if(nasaResponse.ok){
           const nasaResponseData = await nasaResponse.json();
           return nasaResponseData;
       }else{
-        return this.getSixRandomPics();
-        // throw `Error: ${nasaResponse.status} ${nasaResponse.statusText}`;
+        // return this.getRandomPics();
+        throw `Error: ${nasaResponse.status} ${nasaResponse.statusText}`;
       }
   }
 

@@ -84,7 +84,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .main{
     margin-top: 90px;
     padding: 50px;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 .cards{
@@ -162,10 +162,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             position: relative;
             top: 0;
             left: 0;
-            transition: font-size 200ms ease-in-out;
+            transition: transform 100ms ease-in-out;
             &:hover {
                 // transform: scale(1.2);
-                transform: scale(1.01);
+                transform: scale(1.1);
                 // font-size: 27px;
                 cursor: pointer;
             }
@@ -184,8 +184,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         }
         .show {
             // transform: scale(1);
-            // opacity: 1;
-            transform:scale(1.2);
+            opacity: 1;
+            transform:scale(1.25);
             // font-size: 29px;
         }
     }
@@ -304,6 +304,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             }
         }
     }
+}
+
+.more-icon-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.more-icon {
+    color: #fff;
+    transform: rotate(90deg) scale(2);
+    animation: floating 5s ease-in-out infinite;
+}
+
+
+@keyframes floating {
+    from {transform: rotate(90deg) scale(2) translateX(0px) }
+    65% {transform: rotate(90deg) scale(2) translateX(15px) }
+    to {transform: rotate(90deg) scale(2) translateX(0px) }
 }
 
 @keyframes shine{

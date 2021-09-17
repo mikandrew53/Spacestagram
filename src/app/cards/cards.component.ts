@@ -37,7 +37,7 @@ export class CardsComponent implements OnInit {
     end: new FormControl()
   });
 
-  constructor(private heartFill: HeartFillService, private GetCards: GetCardsService){
+  constructor(private heartFill: HeartFillService, private getCardsService: GetCardsService){
     this.faHeartFill = this.heartFill.getHeart();
   }
 
@@ -63,33 +63,41 @@ export class CardsComponent implements OnInit {
         imgLoading: true
       })
     }
-
-    this.GetCards.getSixRandomPics().then(data => {
-      console.log(data);
-      data.forEach((card: Card) => {
-        // console.log(card.url);
-        this.cards[this.index].date = card.date;
-        this.cards[this.index].explanation = card.explanation;
-        this.cards[this.index].hdurl = card.hdurl;
-        this.cards[this.index].url = card.url;
-        this.cards[this.index].title = card.title;
-        this.cards[this.index].service_version = card.service_version;
-        this.cards[this.index].media_type = card.media_type;
-        this.cards[this.index].loading = false;
-        if (card.hdurl !== '')
-          this.cards[this.index].imgSrc = card.hdurl;
-        else
-          this.cards[this.index].imgSrc = card.url;
-        this.index++;
-      });
-      
+    this.getCardsHelper();
+  }
+  
+  getCardsHelper(){
+    this.getCardsService.getRandomPics().then(data => {
+      this.parseCard(data);
     })
-    .catch(error => {
-      
-      
+    .catch((error: any) => {
+      console.log(error);
+      this.getCardsHelper();
     });
+    
   }
 
+
+  parseCard(cards: Array<Card>){
+    cards.forEach((card: Card) => {
+      if (card.media_type !== "image"){
+        return this.getCard();
+      }
+      this.cards[this.index].date = card.date;
+      this.cards[this.index].explanation = card.explanation;
+      this.cards[this.index].hdurl = card.hdurl;
+      this.cards[this.index].url = card.url;
+      this.cards[this.index].title = card.title;
+      this.cards[this.index].service_version = card.service_version;
+      this.cards[this.index].media_type = card.media_type;
+      this.cards[this.index].loading = false;
+      if (card.hdurl !== '')
+        this.cards[this.index].imgSrc = card.hdurl;
+      else
+        this.cards[this.index].imgSrc = card.url;
+      this.index++;
+    });
+  }
   onImgdbclick(card: Card) {
     card.liked = true;
     card.animate = true
@@ -106,10 +114,33 @@ export class CardsComponent implements OnInit {
   }
 
   onImgLoad(card: Card){
-    console.log('loaded');
-    
     card.imgLoading = false;
-    
+  }
+
+  getCard(){
+    this.getCardsService.getRandomPics(1).then((card: Array<Card>) => {
+      if (card[0].media_type !== "image" ){
+        this.getCard();
+        return
+      }
+      this.cards[this.index].date = card[0].date;
+      this.cards[this.index].explanation = card[0].explanation;
+      this.cards[this.index].hdurl = card[0].hdurl;
+      this.cards[this.index].url = card[0].url;
+      this.cards[this.index].title = card[0].title;
+      this.cards[this.index].service_version = card[0].service_version;
+      this.cards[this.index].media_type = card[0].media_type;
+      this.cards[this.index].loading = false;
+      if (card[0].hdurl !== '')
+        this.cards[this.index].imgSrc = card[0].hdurl;
+      else
+        this.cards[this.index].imgSrc = card[0].url;
+      this.index++;  
+    })
+    .catch((error: any) => {
+      console.log(error);
+      this.getCard();
+    });
   }
 
 }
