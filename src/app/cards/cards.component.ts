@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
-import { Card } from './CardModle';
+import { Card } from './CardModel';
 import { GetCardsService } from './get-cards.service';
 import { NavEventsService } from '../navigation/nav-events.service';
 import { NavEvent } from '../navigation/NavEvent';

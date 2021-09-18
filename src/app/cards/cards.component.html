@@ -31,7 +31,7 @@
             
             <div class="img-wrapper">
                 <div *ngIf="card.imgLoading" class="img-loading section-loading"></div>
-                <img class='img' mat-card-image src="{{card.hdurl}}" alt="Photo of {{card.title}}" (dblclick)="onImgdbclick(card)" (load)="onImgLoad(card)">
+                <img class='img' mat-card-image src="{{card.url}}" alt="Photo of {{card.title}}" (dblclick)="onImgdbclick(card)" (load)="onImgLoad(card)">
                 <div class="img-overlay">
                     <mat-icon class="heart-in-img" [ngClass]="{'show-heart-in-img': card.animate}">favorite</mat-icon>
                 </div>
@@ -44,9 +44,9 @@
                 <mat-icon>favorite_border</mat-icon>
             </div>
             <div class="like">
-                <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(244, 67, 54,.5)'" mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="onLikeClicked(card)">
+                <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(244, 67, 54,.5)'" mat-icon-button (click)="onLikeClicked(card)">
                     <mat-icon>favorite_border</mat-icon>
-                    </button>
+                </button>
                 <mat-icon class="fill-heart" [ngClass]="{'show': card.liked}">favorite</mat-icon>
             </div>
         </div>

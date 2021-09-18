@@ -200,6 +200,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         max-height: 140px;
         overflow-y: auto;
     }
+    .content::-webkit-scrollbar {
+        display: none;
+      }
+      
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .content {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+      
 }
 
 .section-loading {

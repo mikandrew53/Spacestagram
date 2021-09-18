@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Card } from './cards/CardModle';
+import { Card } from './cards/CardModel';
 @Injectable({
   providedIn: 'root'
 })
+
 export class LikedCardsService {
   private likedCards: Array<Card> = []
   private likedTitles = {};

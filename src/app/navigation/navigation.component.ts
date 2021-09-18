@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Card } from '../cards/CardModle';
+import { Card } from '../cards/CardModel';
 import { LikedCardsService } from '../liked-cards.service';
 import { NavEventsService } from './nav-events.service';
 
