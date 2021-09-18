@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/spacetagram",
+    "public": "dist/spacestagram",
     "ignore": [
       "firebase.json",
       "**/.*",
