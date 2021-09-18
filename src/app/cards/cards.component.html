@@ -44,7 +44,8 @@
                 <mat-icon>favorite_border</mat-icon>
             </div>
             <div class="like">
-                <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(244, 67, 54,.5)'" mat-icon-button (click)="onLikeClicked(card)">
+                <!-- <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(244, 67, 54,.5)'" mat-icon-button (click)="onLikeClicked(card)"> -->
+                <button  class="heart-outline" matRipple [matRippleCentered]="true" [matRippleColor]="'rgba(233, 30, 99,.5)'" mat-icon-button (click)="onLikeClicked(card)">
                     <mat-icon>favorite_border</mat-icon>
                 </button>
                 <mat-icon class="fill-heart" [ngClass]="{'show': card.liked}">favorite</mat-icon>

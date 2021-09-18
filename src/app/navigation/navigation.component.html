@@ -1,8 +1,9 @@
 <nav class="nav-bar">
-    <h1 class="logo" (click)="onLogoClick()">Spacestagram</h1>
+    <h1 class="logo" (click)="onLogoClick()" *ngIf="!mobile">Spacestagram</h1>
+    <h1 class="logo" (click)="onLogoClick()" *ngIf="mobile">S</h1>
     
     <div class="date-input" style="justify-self: center;">
-      <mat-form-field style="height: 10;" appearance=fill>
+      <mat-form-field style="height: 10; max-width: 60%;" appearance=fill>
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [min]="minDate" [max]="maxDate" [rangePicker]="picker">
           <input [readonly]="true" matStartDate placeholder="Start date" #dateRangeStart>
@@ -14,7 +15,7 @@
     </div>  
       
     <div class="likes">
-      <button mat-icon-button aria-label="Example icon-button with a menu" color=warn matTooltip="My Likes"[matTooltipPosition]="'below'" (click)="onLikesClick()"> 
+      <button mat-icon-button aria-label="Example icon-button with a menu" color=primary matTooltip="My Likes"[matTooltipPosition]="'below'" (click)="onLikesClick()"> 
           <mat-icon>favorite_border</mat-icon>
       </button>
         

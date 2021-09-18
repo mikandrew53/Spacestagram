@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Card } from '../cards/CardModel';
 import { LikedCardsService } from '../liked-cards.service';
 import { NavEventsService } from './nav-events.service';
-
+// 1320px
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -14,9 +14,15 @@ export class NavigationComponent implements OnInit {
   maxDate: Date;
   likedCards: Array<Card>;
   likedCardsTitles;
+  mobile: boolean = (window.innerWidth < 1319)
   
   @ViewChild('dateRangeStart', {static: true}) dateRangeStart:ElementRef;
   @ViewChild('dateRangeEnd', {static: true}) dateRangeEnd:ElementRef;
+
+  @HostListener('window:resize', ['$event'])
+    onResize(event) {
+      event.target.innerWidth < 1319 ? this.mobile = true : this.mobile = false;    
+  }
 
   constructor(
     private navEvents: NavEventsService,

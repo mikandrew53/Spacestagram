@@ -7,6 +7,8 @@ $accent: #607d8b;
 $warn: #f44336;
 
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto:wght@300&display=swap');
+
 $logo-font: 'Marck Script', cursive;
 
 * {
@@ -38,7 +40,10 @@ h1 {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: "Helvetica Neue", sans-serif;
+ }
 
 ::ng-deep .mat-form-field-wrapper{
     margin-bottom: -1.25em;
@@ -104,7 +109,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 .card {
-    box-shadow: 5px 5px 5px rgba(0,0,0,.08) !important;
+    box-shadow: 5px 10px 10px rgba(0,0,0,.08) !important;
     padding: 15px 0 !important;
     position: relative;
     // max-width: 400px;
@@ -187,6 +192,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             pointer-events: none;
             transition: all ease-in-out 100ms;
             color: $warn;
+            color: $primary;
         }
         .show {
             // transform: scale(1);
@@ -199,6 +205,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         padding: 0 10px;
         max-height: 140px;
         overflow-y: auto;
+        font-family: 'Roboto', sans-serif;
+        font-family: "Helvetica Neue", sans-serif;
     }
     .content::-webkit-scrollbar {
         display: none;
@@ -335,10 +343,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     animation: floating 5s ease-in-out infinite;
 }
 
-.modal {
-
-}
-
 
 @keyframes floating {
     from {transform: rotate(90deg) scale(2) translateX(0px) }
@@ -353,6 +357,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 }
 
+@media(max-width: 1500px){
+    .nav-bar{
+        padding: 0 5%;
+    }
+}
 @media(max-width: 1320px){
     .cards{
         grid-template-columns: 50% 50%;
@@ -362,6 +371,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @media(max-width: 637px){
     .cards{
         grid-template-columns: 100%;
+    }
+    .main {
+        padding: 20px;
+        padding-bottom: 150px;
     }
 }
 
