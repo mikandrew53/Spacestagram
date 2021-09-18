@@ -74,30 +74,26 @@ export class CardsComponent implements OnInit {
       this.endDate = event.endDate;
       if (event.home && !this.home){
         this.home = true;
+        this.likes = false;
         this.resetCards();
         this.getCards();
       }else if((event.startDate !== '' && event.endDate !== '') && datesAreDifferent){
         this.home = false;
+        this.likes = false;
         this.getCardsUsingDateRange(event.startDate, event.endDate);
       }else if (event.startDate !== '' && datesAreDifferent){
         this.home = false;
+        this.likes = false;
         this.getCardsOnDate(event.startDate);
       }
     })
   }
 
   displayLikes() {
-    console.log('Dsiplay');
-    
     this.resetCards();
     this.creatCards(this.likedCardsService.getLikedCards().length);
-    this.likedCardsService.getLikedCards().forEach((card:Card) => {
-      this.updateCard(card);
-    });
-    
+    this.likedCardsService.getLikedCards().forEach((card:Card) => this.updateCard(card));
   }
-
-
 
   getDay(date: string): number{
     if (date[date.length-2] === '-')
@@ -138,6 +134,7 @@ export class CardsComponent implements OnInit {
       });
     });
   }
+
   getCardsOnDate(date: string){
     this.resetCards();
     this.creatCards(1);
