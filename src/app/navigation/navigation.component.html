@@ -5,8 +5,8 @@
       <mat-form-field style="height: 10;" appearance=fill>
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [min]="minDate" [max]="maxDate" [rangePicker]="picker">
-          <input matStartDate placeholder="Start date" #dateRangeStart>
-          <input matEndDate placeholder="End date" #dateRangeEnd>
+          <input [readonly]="true" matStartDate placeholder="Start date" #dateRangeStart>
+          <input [readonly]="true" matEndDate placeholder="End date" #dateRangeEnd>
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker (closed)="dateRangeChange(dateRangeStart.value, dateRangeEnd.value)"></mat-date-range-picker>
@@ -15,22 +15,14 @@
       
     <div class="likes">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" color=warn matTooltip="My Likes"[matTooltipPosition]="'below'"> 
-          <mat-icon matBadge="3" matBadgeColor="warn"><mat-icon>favorite_border</mat-icon></mat-icon>
+          <mat-icon>favorite_border</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
-        </button>
+        <div class="modal" [ngClass]="{'openModal': true}">
+        <button mat-menu-item *ngFor="let card of Object.keys(likedCardService.getLikedTitles())" (click)="cardClicked(card)">
+            <p>{{card}}</p>
+          </button>
+        </div>
       </mat-menu>
-      
     </div>
   </nav>

@@ -12,5 +12,6 @@ export interface Card {
     imgLoading: boolean
     imgSrc: any
     display: boolean
+    openModal: boolean
 }
 

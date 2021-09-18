@@ -5,6 +5,7 @@ import { GetCardsService } from './get-cards.service';
 import { NavEventsService } from '../navigation/nav-events.service';
 import { NavEvent } from '../navigation/NavEvent';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { LikedCardsService } from '../liked-cards.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class CardsComponent implements OnInit {
   constructor(
     private getCardsService: GetCardsService,
     private nav: NavEventsService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private likedCards: LikedCardsService
     ) { }
     
     ngOnInit(): void {
@@ -126,7 +128,8 @@ export class CardsComponent implements OnInit {
         loading: true,
         imgSrc: '',
         display: true,
-        imgLoading: true
+        imgLoading: true,
+        openModal: false
       })
     }
   }
@@ -157,6 +160,7 @@ export class CardsComponent implements OnInit {
   }
 
   onImgdbclick(card: Card) {
+    this.likedCards.addLiked(card);
     card.liked = true;
     card.animate = true
     setTimeout(() => card.animate = false , 1000);
@@ -165,9 +169,11 @@ export class CardsComponent implements OnInit {
   onLikeClicked(card: Card){
     card.liked = !card.liked;
     if (card.liked){
+      this.likedCards.addLiked(card);
       card.animate = true
       setTimeout(() => card.animate = false , 1000);
-    }
+    }else 
+      this.likedCards.removeLike(card);
   }
 
   onImgLoad(card: Card){
@@ -188,6 +194,8 @@ export class CardsComponent implements OnInit {
   }
 
   updateCard(card: Card){
+    console.log('updating');
+    
     this.cards[this.index].date = card.date;
     this.cards[this.index].explanation = card.explanation;
     this.cards[this.index].hdurl = card.hdurl;
@@ -196,6 +204,7 @@ export class CardsComponent implements OnInit {
     this.cards[this.index].service_version = card.service_version;
     this.cards[this.index].media_type = card.media_type;
     this.cards[this.index].loading = false;
+    this.cards[this.index].liked = this.likedCards.getLikedTitles()[card.title];
     if (card.hdurl !== '')
       this.cards[this.index].imgSrc = card.hdurl;
     else

@@ -31,7 +31,7 @@
             
             <div class="img-wrapper">
                 <div *ngIf="card.imgLoading" class="img-loading section-loading"></div>
-                <img class='img' mat-card-image src="{{card.url}}" alt="Photo of {{card.title}}" (dblclick)="onImgdbclick(card)" (load)="onImgLoad(card)">
+                <img class='img' mat-card-image src="{{card.hdurl}}" alt="Photo of {{card.title}}" (dblclick)="onImgdbclick(card)" (load)="onImgLoad(card)">
                 <div class="img-overlay">
                     <mat-icon class="heart-in-img" [ngClass]="{'show-heart-in-img': card.animate}">favorite</mat-icon>
                 </div>

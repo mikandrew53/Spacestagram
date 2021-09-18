@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { LikedCardsService } from '../liked-cards.service';
 import { NavEventsService } from './nav-events.service';
-
-
-
 
 @Component({
   selector: 'app-navigation',
@@ -13,12 +11,20 @@ import { NavEventsService } from './nav-events.service';
 export class NavigationComponent implements OnInit {
   minDate: Date | undefined;
   maxDate: Date | undefined;
-  constructor(private navEvents: NavEventsService) { }
+  likedCardService: LikedCardsService;
+  Object = Object;
+  @ViewChild('dateRangeStart', {static: true}) dateRangeStart:ElementRef;
+  @ViewChild('dateRangeEnd', {static: true}) dateRangeEnd:ElementRef;
+  constructor(
+    private navEvents: NavEventsService,
+    private likedCards: LikedCardsService
+    ) { }
 
   ngOnInit(): void {
     const date = new Date();
     this.minDate = new Date(1995, 5, 16);
     this.maxDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    this.likedCardService = this.likedCards;
   }
 
   dateRangeChange(dateRangeStart: any, dateRangeEnd: any){
@@ -54,7 +60,14 @@ export class NavigationComponent implements OnInit {
   }
 
   onLogoClick(){
+    // this.dateRangeStart.nativeElement.value = '';
+    // this.dateRangeEnd.nativeElement.value = '';
     this.navEvents.emitNavEvent({home: true, startDate: '', endDate: ''})
+  }
+
+  cardClicked(card){
+    console.log(card);
+    
   }
 
   
