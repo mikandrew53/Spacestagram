@@ -39,14 +39,14 @@ export class CardsComponent implements OnInit {
     private likedCardsService: LikedCardsService
     ) { }
     
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.getCards();
     this.nav.signUpEmail
     .subscribe((event: NavEvent) => {
       const datesAreDifferent: boolean = (this.startDate !== event.startDate || this.endDate !== event.endDate); 
       this.startDate = event.startDate;
       this.endDate = event.endDate;
-      
+
       if (event.likes && this.likes){
         this._snackBar.open('Already displaying your likes!', 'Okay', {
           horizontalPosition: 'center',

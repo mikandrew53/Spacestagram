@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 $grey: #303030;
 $very-dark-grey: darken($color: $grey, $amount: 4);
+$light-grey: lighten($color: $grey, $amount: 6);
 $dark-grey: darken($color: $grey, $amount: 2);
 $primary: #e91e63;
 $accent: #607d8b;
@@ -19,8 +20,8 @@ $logo-font: 'Marck Script', cursive;
 }
 body{ 
     overflow-X: hidden;
-    // background-color: lighten($color: $grey, $amount: 20);
     background-color: $grey; 
+    background-color: $light-grey; 
 }
 ul{
     list-style: none;
@@ -56,12 +57,14 @@ body {
     z-index: 99;
     height: 90px;
     background-color: $grey;
+    background-color: $light-grey;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid $primary;
     @supports ((-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))) {
         background-color: rgba($color: $grey, $alpha: 0.8);
+        background-color: rgba($color: $light-grey, $alpha: 0.8);
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
       }
@@ -101,7 +104,7 @@ body {
     display: grid;
     justify-content: center;
     grid-template-columns: 400px 400px 400px;
-    column-gap: 20px;
+    column-gap: 30px;
     row-gap: 40px;
 }
 
@@ -109,6 +112,7 @@ body {
 .card {
     box-shadow: 5px 10px 10px rgba(0,0,0,.08) !important;
     padding: 15px 0 !important;
+    background-color: $grey;
     position: relative;
     // max-width: 400px;
     height: 600px;
