@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Card } from '../cards/CardModle';
 import { LikedCardsService } from '../liked-cards.service';
 import { NavEventsService } from './nav-events.service';
 
@@ -9,22 +10,25 @@ import { NavEventsService } from './nav-events.service';
 })
 
 export class NavigationComponent implements OnInit {
-  minDate: Date | undefined;
-  maxDate: Date | undefined;
-  likedCardService: LikedCardsService;
-  Object = Object;
+  minDate: Date;
+  maxDate: Date;
+  likedCards: Array<Card>;
+  likedCardsTitles;
+  
   @ViewChild('dateRangeStart', {static: true}) dateRangeStart:ElementRef;
   @ViewChild('dateRangeEnd', {static: true}) dateRangeEnd:ElementRef;
+
   constructor(
     private navEvents: NavEventsService,
-    private likedCards: LikedCardsService
+    private likedCardsService: LikedCardsService
     ) { }
 
   ngOnInit(): void {
     const date = new Date();
     this.minDate = new Date(1995, 5, 16);
     this.maxDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    this.likedCardService = this.likedCards;
+    this.likedCards = this.likedCardsService.getLikedCards();
+    this.likedCardsTitles = this.likedCardsService.getLikedTitles();
   }
 
   dateRangeChange(dateRangeStart: any, dateRangeEnd: any){
@@ -33,7 +37,7 @@ export class NavigationComponent implements OnInit {
     dateRangeStart = this.parseDate(dateRangeStart)
     if (dateRangeEnd !== '')
       dateRangeEnd = this.parseDate(dateRangeEnd)
-    this.navEvents.emitNavEvent({home: false, startDate: dateRangeStart, endDate: dateRangeEnd}) 
+    this.navEvents.emitNavEvent({home: false, likes: false, startDate: dateRangeStart, endDate: dateRangeEnd}) 
   }
 
   parseDate(date: string){
@@ -60,16 +64,14 @@ export class NavigationComponent implements OnInit {
   }
 
   onLogoClick(){
-    // this.dateRangeStart.nativeElement.value = '';
-    // this.dateRangeEnd.nativeElement.value = '';
-    this.navEvents.emitNavEvent({home: true, startDate: '', endDate: ''})
+    this.navEvents.emitNavEvent({home: true, likes: false , startDate: '', endDate: ''})
   }
-
-  cardClicked(card){
-    console.log(card);
-    
-  }
-
   
+  onLikesClick() {
+    this.navEvents.emitNavEvent({home: false, likes: true , startDate: '', endDate: ''})
+  }
 
+  cardClicked(card: Card){
+    card.openModal = true;
+  }
 }

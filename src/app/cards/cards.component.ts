@@ -25,10 +25,9 @@ export class CardsComponent implements OnInit {
   cards: Array<Card> = []
   index = 0;
   home: boolean = true;
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+  likes: boolean = false;
+
+  likedCards: Array<Card>;
 
   startDate: string = '';
   endDate: string = '';
@@ -37,13 +36,39 @@ export class CardsComponent implements OnInit {
     private getCardsService: GetCardsService,
     private nav: NavEventsService,
     private _snackBar: MatSnackBar,
-    private likedCards: LikedCardsService
+    private likedCardsService: LikedCardsService
     ) { }
     
     ngOnInit(): void {
     this.getCards();
     this.nav.signUpEmail
     .subscribe((event: NavEvent) => {
+      if (event.likes && this.likes){
+        this._snackBar.open('Already displaying your likes!', 'Okay', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 5000
+        });
+        return;
+      }
+
+      if (event.likes && this.likedCardsService.getLikedCards().length < 1){
+        this._snackBar.open('No liked pictures!', 'Okay', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 5000
+        });
+        return;
+      }
+
+      if (event.likes && !this.likes){
+        this.likes = true;
+        this.home = false;
+        this.displayLikes();
+        return;
+      }
+
+
       const datesAreDifferent: boolean = (this.startDate !== event.startDate || this.endDate !== event.endDate); 
       this.startDate = event.startDate;
       this.endDate = event.endDate;
@@ -60,6 +85,19 @@ export class CardsComponent implements OnInit {
       }
     })
   }
+
+  displayLikes() {
+    console.log('Dsiplay');
+    
+    this.resetCards();
+    this.creatCards(this.likedCardsService.getLikedCards().length);
+    this.likedCardsService.getLikedCards().forEach((card:Card) => {
+      this.updateCard(card);
+    });
+    
+  }
+
+
 
   getDay(date: string): number{
     if (date[date.length-2] === '-')
@@ -143,13 +181,11 @@ export class CardsComponent implements OnInit {
     this.getCardsService.getRandomPics().then(data => {
       this.parseCards(data);
     })
-    .catch((error: any) => {
-      console.log(error);
+    .catch((error: Error) => {
+      console.log(error.message);
       this.getCardsHelper();
     });
-    
   }
-
 
   parseCards(cards: Array<Card>){
     cards.forEach((card: Card) => {
@@ -160,7 +196,7 @@ export class CardsComponent implements OnInit {
   }
 
   onImgdbclick(card: Card) {
-    this.likedCards.addLiked(card);
+    this.likedCardsService.addLiked(card);
     card.liked = true;
     card.animate = true
     setTimeout(() => card.animate = false , 1000);
@@ -169,11 +205,11 @@ export class CardsComponent implements OnInit {
   onLikeClicked(card: Card){
     card.liked = !card.liked;
     if (card.liked){
-      this.likedCards.addLiked(card);
+      this.likedCardsService.addLiked(card);
       card.animate = true
       setTimeout(() => card.animate = false , 1000);
     }else 
-      this.likedCards.removeLike(card);
+      this.likedCardsService.removeLike(card);
   }
 
   onImgLoad(card: Card){
@@ -187,15 +223,13 @@ export class CardsComponent implements OnInit {
       else
         this.updateCard(card[0]);
     })
-    .catch((error: any) => {
-      console.log(error);
+    .catch((error: Error) => {
+      console.log(error.message);
       this.getCard();
     });
   }
 
   updateCard(card: Card){
-    console.log('updating');
-    
     this.cards[this.index].date = card.date;
     this.cards[this.index].explanation = card.explanation;
     this.cards[this.index].hdurl = card.hdurl;
@@ -204,7 +238,7 @@ export class CardsComponent implements OnInit {
     this.cards[this.index].service_version = card.service_version;
     this.cards[this.index].media_type = card.media_type;
     this.cards[this.index].loading = false;
-    this.cards[this.index].liked = this.likedCards.getLikedTitles()[card.title];
+    this.cards[this.index].liked = (card.title in this.likedCardsService.getLikedTitles());
     if (card.hdurl !== '')
       this.cards[this.index].imgSrc = card.hdurl;
     else

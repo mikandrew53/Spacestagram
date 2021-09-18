@@ -1,5 +1,6 @@
 export interface NavEvent {
-    home: boolean 
+    home: boolean
+    likes: boolean 
     startDate: string 
     endDate: string
 }

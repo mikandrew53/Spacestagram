@@ -14,15 +14,11 @@
     </div>  
       
     <div class="likes">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" color=warn matTooltip="My Likes"[matTooltipPosition]="'below'"> 
+      <button mat-icon-button aria-label="Example icon-button with a menu" color=warn matTooltip="My Likes"[matTooltipPosition]="'below'" (click)="onLikesClick()"> 
           <mat-icon>favorite_border</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <div class="modal" [ngClass]="{'openModal': true}">
-        <button mat-menu-item *ngFor="let card of Object.keys(likedCardService.getLikedTitles())" (click)="cardClicked(card)">
-            <p>{{card}}</p>
-          </button>
-        </div>
-      </mat-menu>
+        
     </div>
+      
+    
   </nav>
