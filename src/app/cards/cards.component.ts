@@ -62,6 +62,7 @@ export class CardsComponent implements OnInit {
       }
 
       if (event.likes && !this.likes){
+        window.scrollTo(0, 0);
         this.likes = true;
         this.home = false;
         this.displayLikes();
@@ -73,15 +74,18 @@ export class CardsComponent implements OnInit {
       this.startDate = event.startDate;
       this.endDate = event.endDate;
       if (event.home && !this.home){
+        window.scrollTo(0, 0);
         this.home = true;
         this.likes = false;
         this.resetCards();
         this.getCards();
       }else if((event.startDate !== '' && event.endDate !== '') && datesAreDifferent){
+        window.scrollTo(0, 0);
         this.home = false;
         this.likes = false;
         this.getCardsUsingDateRange(event.startDate, event.endDate);
       }else if (event.startDate !== '' && datesAreDifferent){
+        window.scrollTo(0, 0);
         this.home = false;
         this.likes = false;
         this.getCardsOnDate(event.startDate);

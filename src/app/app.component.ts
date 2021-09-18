@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent { }
+export class AppComponent { 
+  ngOnInit(): void {
+    window.scrollTo(0, 0);
+  }
+}
