@@ -13,14 +13,15 @@ export class GetCardsService {
   constructor() { }
 
   async getRandomPics(count:number = 6): Promise<any> {
-    console.log();
+    console.log('fetching');
     
     const nasaResponse = await fetch(`${this.base}&count=${count}&thumbs=true`);
       if(nasaResponse.ok){
           const nasaResponseData = await nasaResponse.json();
           return nasaResponseData;
-      }else
+      }else{
         throw Error(`Error: ${nasaResponse.status} ${nasaResponse.statusText}`);
+      }
   }
 
   async getPictureWithDateRange(startDate: string, endDate: string): Promise<any>{

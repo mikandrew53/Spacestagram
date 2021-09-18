@@ -10,6 +10,7 @@ $warn: #f44336;
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto:wght@300&display=swap');
 
+
 $logo-font: 'Marck Script', cursive;
 * {
     padding: 0;
@@ -42,6 +43,18 @@ html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: "Helvetica Neue", sans-serif;
+ }
+
+ .hide-btn {
+     background: none;
+     outline: none;
+     border: none;
+     padding: 13px;
+     &:focus {
+         outline: none;
+        border: 2px solid $primary;
+        border-radius: 3px;
+     }
  }
 
 ::ng-deep .mat-form-field-wrapper{
@@ -113,7 +126,7 @@ body {
 .card {
     box-shadow: 5px 10px 10px rgba(0,0,0,.08) !important;
     padding: 15px 0 !important;
-    background-color: $grey;
+    background-color: $dark-grey;
     position: relative;
     // max-width: 400px;
     height: 600px;
@@ -237,6 +250,7 @@ body {
             .heart-outline{
                 &:hover{
                     cursor: default;
+                    transform: scale(1);
                 }
             }
         }
@@ -348,6 +362,7 @@ body {
 
 .space-ship {
     position: absolute;
+    bottom: -300px;
     height: 200px;
     width: auto;
     transform: rotate(30deg);
@@ -395,6 +410,7 @@ body {
         padding: 0 5%;
     }
 }
+
 @media(max-width: 1320px){
     .cards{
         grid-template-columns: 50% 50%;

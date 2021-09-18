@@ -1,6 +1,7 @@
 <nav class="nav-bar">
-    <h1 class="logo" (click)="onLogoClick()" *ngIf="!mobile">Spacestagram</h1>
-    <h1 class="logo" (click)="onLogoClick()" *ngIf="mobile">S</h1>
+  <button class="hide-btn" (click)="onLogoClick()" *ngIf="!mobile"><h1 class="logo" >Spacestagram</h1></button>
+  <button class="hide-btn" (click)="onLogoClick()" *ngIf="mobile"><h1 class="logo">S</h1></button>
+    
     
     <div class="date-input" style="justify-self: center;">
       <mat-form-field style="height: 10; max-width: 60%;" appearance=fill>
