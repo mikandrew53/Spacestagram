@@ -98,6 +98,7 @@ body {
     margin-top: 90px;
     padding: 50px;
     padding-bottom: 150px;
+    
 }
 
 .cards{
@@ -343,6 +344,36 @@ body {
     color: #fff;
     transform: rotate(90deg) scale(2);
     animation: floating 5s ease-in-out infinite;
+}
+
+.space-ship {
+    position: absolute;
+    height: 200px;
+    width: auto;
+    transform: rotate(30deg);
+    animation: liftOff 10s ease-in-out infinite;
+}
+
+.ufo{
+    position: absolute;
+    height: 100px;
+    width: auto;
+    top: 200px;
+    right: 0;
+    transform: rotate(30deg);
+    animation: liftOff 10s ease-in-out infinite;
+}
+
+@keyframes liftOff{
+    from {
+        transform: rotate(30deg);
+    }
+    50% {
+        transform: rotate(30deg) translateY(-100px) translateX(-100px);
+    }
+    100% {
+        transform: rotate(30deg) translateY(0px) translateX(0px);
+    }
 }
 
 
