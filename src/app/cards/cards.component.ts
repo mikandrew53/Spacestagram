@@ -43,6 +43,10 @@ export class CardsComponent implements OnInit {
     this.getCards();
     this.nav.signUpEmail
     .subscribe((event: NavEvent) => {
+      const datesAreDifferent: boolean = (this.startDate !== event.startDate || this.endDate !== event.endDate); 
+      this.startDate = event.startDate;
+      this.endDate = event.endDate;
+      
       if (event.likes && this.likes){
         this._snackBar.open('Already displaying your likes!', 'Okay', {
           horizontalPosition: 'center',
@@ -69,10 +73,6 @@ export class CardsComponent implements OnInit {
         return;
       }
 
-
-      const datesAreDifferent: boolean = (this.startDate !== event.startDate || this.endDate !== event.endDate); 
-      this.startDate = event.startDate;
-      this.endDate = event.endDate;
       if (event.home && !this.home){
         window.scrollTo(0, 0);
         this.home = true;
