@@ -17,7 +17,7 @@ export class CardsComponent implements OnInit {
   @HostListener('window:scroll', ['$event']) onScrollEvent($event: any){
     let scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
       let scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
-      let scrolledToBottom = (scrollTop + window.innerHeight) >= scrollHeight;
+      let scrolledToBottom = (scrollTop + window.innerHeight + 50) >= scrollHeight;
       if (scrolledToBottom && this.home) {
         this.getCards();
       }
