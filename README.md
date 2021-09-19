@@ -4,5 +4,10 @@
 
 [Nasa API](https://api.nasa.gov)
 
-
+# Loading State
+For the loading state I went with skeleton screen design
 ![loading state](GitHubAssets/loading.gif)
+
+# Content
+![](GitHubAssets/sc1.png)
+![](GitHubAssets/sc2.png)
