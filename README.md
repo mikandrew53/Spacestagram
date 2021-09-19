@@ -5,4 +5,4 @@
 [Nasa API](https://api.nasa.gov)
 
 
-![](GitHubAssets/loading.gif)
+![loading state](GitHubAssets/loading.gif)
