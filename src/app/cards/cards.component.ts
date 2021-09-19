@@ -213,7 +213,7 @@ export class CardsComponent implements OnInit {
   }
 
   onImgLoad(card: Card){
-    // card.imgLoading = false;
+    card.imgLoading = false;
   }
 
   getCard(){
@@ -237,7 +237,7 @@ export class CardsComponent implements OnInit {
     this.cards[this.index].title = card.title;
     this.cards[this.index].service_version = card.service_version;
     this.cards[this.index].media_type = card.media_type;
-    // this.cards[this.index].loading = false;
+    this.cards[this.index].loading = false;
     this.cards[this.index].liked = (card.title in this.likedCardsService.getLikedTitles());
     if (card.hdurl !== '')
       this.cards[this.index].imgSrc = card.hdurl;
