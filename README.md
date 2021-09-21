@@ -1,5 +1,5 @@
-# [Spacestagram](https://spacetagram-a514f.web.app)
-# [Live Link](https://spacetagram-a514f.web.app)
+# [Spacestagram](https://spacetagram-a514f.firebaseapp.com)
+# [Live Link](https://spacetagram-a514f.firebaseapp.com)
 
 # Description
 This web app was built using angular. The purpose of this web app is to utilize the NASA API to pull images (and its metadata), and allow the user to “like” and “unlike” their favourite images. It saves the liked photos to the user's local storage. 
